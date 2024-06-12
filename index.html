@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Button</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ed50fe;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: white;
+            font-size:48px;
+            font-family: Georgia;
+            text-shadow: 1px 3px 0 #000;
+        }
+        .button-container {
+            text-align: center;
+            background: rgb(250, 252, 252);
+            padding: 40px 20px;
+            border-radius: 25px;
+            box-shadow: 2px 12px 5px rgba(0,0,0,0.1);
+        }
+        .btn-custom {
+            background-color: #ff07c5;
+            color: white;
+            font-size:24px;
+            font-family: monospace;
+            text-shadow:1px 2px 0 #000;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: background-color 0.3s;
+            box-shadow: 2px 12px 5px rgba(0,0,0,0.1);
+        }
+        .btn-custom:hover {
+            background-color: #fd0415;
+            color: white;
+        }
+        .description {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #fe0a06;
+        }
+        .spark {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            background: gold;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>CV Viktoriya Pashkouskaya ©</h1>
+    <div class="button-container">
+        <button id="githubButton" class="btn btn-custom">
+            Haz clic en el botón y obtén mi enlace de GitHub
+        </button>
+        <div class="description">
+            ¡Gracias por tu interés en mi perfil de GitHub!
+        </div>
+    </div>
+    <script>
+        document.getElementById('githubButton').onclick = function() {
+            window.location.href = 'https://github.com/VictoriaPashkouskaya';
+        }
+
+        document.querySelector('.button-container').addEventListener('mouseover', function() {
+            createSparks(20);
+        });
+
+        function createSparks(count) {
+            for (let i = 0; i < count; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                document.querySelector('.button-container').appendChild(spark);
+                animateSpark(spark);
+            }
+        }
+
+        function animateSpark(spark) {
+            const angle = Math.random() * 2 * Math.PI;
+            const radius = Math.random() * 500;
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+            const duration = Math.random() * 5000 + 100;
+
+            spark.style.left = '50%';
+            spark.style.top = '50%';
+            spark.style.transition = `transform ${duration}ms ease-out, opacity ${duration}ms ease-out`;
+            spark.style.transform = `translate(${x}px, ${y}px)`;
+            spark.style.opacity = 1;
+
+            setTimeout(() => {
+                spark.style.opacity = 0;
+                spark.style.transform = `translate(${x * 1.5}px, ${y * 1.5}px)`;
+                setTimeout(() => spark.remove(), duration);
+            }, 0);
+        }
+    </script>
+</body>
+</html>
